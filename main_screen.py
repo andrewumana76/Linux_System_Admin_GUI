@@ -82,17 +82,25 @@ def handle_disconnect(stdscr):
 
 
 
-def create_input_windows(stdscr,prompts):
+def create_input_windows(stdscr,prompts,prompts_y, prompts_x):
 
     input_windows= []
     
     #Creates an input window for each box
-    for i, prompt in enumerate(prompts):
+    for i in range (len(prompts)) :
         
-        input_win = curses.newwin(1, curses.COLS - len(prompt) - 1, i, len(prompt))
+        input_win = curses.newwin(1, (curses.COLS -len(prompts[i]) - 1) // 4 , prompts_y[i], prompts_x[i] + (len(prompts[i])))
         input_windows.append(input_win)
     
     return input_windows
+
+
+
+def create_button(stdscr,button_prompt,button_y,button_x):
+
+    height, width = stdscr.getmaxyx()
+    stdscr.addstr(height // 2, (width - len(button_prompt)) // 2, button_prompt)
+    stdscr.refresh()
 
 
 def create_user(stdscr):
@@ -100,33 +108,52 @@ def create_user(stdscr):
     #clear screen  
     stdscr.clear()
 
+    #Calculating max X and Y length
+    height, width = stdscr.getmaxyx()
+ 
+    box_height = 6
+    box_width = 40
+    y = (curses.LINES - box_height) // 2
+    x = (curses.COLS - box_width) // 2
+    box_win = curses.newwin(box_height, box_width, y, x)
+
+    #Draw box
+    box_win.bkgd(curses.color_pair(3))
+    box_win.box()
+    box_win.refresh()
+   
+    stdscr.refresh()
+    
     #Variable prompts
     username_prompt="Enter Username  : "
-    username_y=0
-    username_x=0
+    username_y=0 + y
+    username_x=0 + x
 
     password_prompt="Enter Password  : "
-    password_y=1
-    password_x=0
+    password_y=1 + y
+    password_x=0 + x
 
     confirm_prompt ="Confirm Password: " 
-    confirm_y=2
-    confirm_x=0
+    confirm_y=2 + y
+    confirm_x=0 + x
 
     prompts = [username_prompt, password_prompt, confirm_prompt]
     prompts_y = [username_y, password_y, confirm_y]
     prompts_x = [username_x, password_x, confirm_x]
 
     refresh = 0
-   
+    current_field=0
+
     while True:
 
+        #key = stdscr.getch()
+
         #Call function to make windows based off of the prompt array
-        input_windows = create_input_windows(stdscr,prompts)
+        input_windows = create_input_windows(stdscr,prompts,prompts_y,prompts_x)
         
         #This for loop displays text such as Enter username or password
         for i in range (len(prompts)):
-            stdscr.addstr(prompts_y[i], prompts_x[i], prompts[i])
+            stdscr.addstr(prompts_y[i], prompts_x[i], prompts[i], curses.A_BOLD)
             stdscr.refresh()
     
         #Refresh sddcreen to show the text added to screen    
@@ -136,22 +163,23 @@ def create_user(stdscr):
         if refresh == 0:
             #Show all windows aka Username, password, confirm password, etc
             for i in range(len(input_windows)) :
-                input_windows[i].refresh()
+                
+                #key = stdscr.getch()
+
+                #if key == 9:
+
+                    #if current_field != ((len(prompts))-1) :
+                    #    current_field += 1
+                    #    input_windows[current_field].move(prompts_y[current_field],prompts_x[current_field])
+                    #else:
+                    #    current_field=0
+                    #    input_windows[current_field].move(prompts_y[current_field],prompts_x[current_field])
+
+                #input_windows[i].refresh()
                 string_from_user = input_windows[i].getstr().decode('utf-8')
             
-            current_field=0
-            input_windows[current_field].move(prompts_y[0],prompts_x[0])
             refresh+=1
         
-
-        #key = stdscr.getch()
-            
-        #if (key == 9) and ((current_field + 1) != len(input_windows)):
-        #    current_field += 1
-        #    input_windows[current_field].move(prompts_y[current_field], prompts_x[current_field])
-        #else:
-        #    current_field = 0
-        #    input_windows[current_field].move(prompts_y[current_field], prompts_x[current_field])
 
 def main(stdscr):
     
