@@ -24,13 +24,12 @@ def create_menu_box(stdscr):
     box_width = 40
     y = (curses.LINES - box_height) // 2
     x = (curses.COLS - box_width) // 2
-    box_win = curses.newwin(box_height, box_width, y, x)
 
     #Draw box
-    box_win.bkgd(curses.color_pair(3))
+    box_win = curses.newwin(box_height, box_width, y, x)
+    box_win.bkgd(' ', curses.color_pair(3))
     box_win.box()
     box_win.refresh()
-   
     stdscr.refresh()
 
     #Text-based interface
@@ -103,6 +102,10 @@ def create_button(stdscr,button_prompt,button_y,button_x):
     stdscr.refresh()
 
 
+#def run_create_user_script(username, password, confirm):
+
+
+
 def create_user(stdscr):
 
     #clear screen  
@@ -143,43 +146,30 @@ def create_user(stdscr):
 
     refresh = 0
     current_field=0
+    bool_var = True
 
-    while True:
 
-        #key = stdscr.getch()
+    while bool_var == True:
 
-        #Call function to make windows based off of the prompt array
         input_windows = create_input_windows(stdscr,prompts,prompts_y,prompts_x)
-        
-        #This for loop displays text such as Enter username or password
+
+
         for i in range (len(prompts)):
             stdscr.addstr(prompts_y[i], prompts_x[i], prompts[i], curses.A_BOLD)
             stdscr.refresh()
-    
-        #Refresh sddcreen to show the text added to screen    
+
+
         curses.echo()
-    
 
-        if refresh == 0:
-            #Show all windows aka Username, password, confirm password, etc
-            for i in range(len(input_windows)) :
-                
-                #key = stdscr.getch()
+        username_input = input_windows[0].getstr().decode('utf-8')
+        password_input = input_windows[1].getstr().decode('utf-8')
+        confirm_input = input_windows[2].getstr().decode('utf-8')
 
-                #if key == 9:
 
-                    #if current_field != ((len(prompts))-1) :
-                    #    current_field += 1
-                    #    input_windows[current_field].move(prompts_y[current_field],prompts_x[current_field])
-                    #else:
-                    #    current_field=0
-                    #    input_windows[current_field].move(prompts_y[current_field],prompts_x[current_field])
-
-                #input_windows[i].refresh()
-                string_from_user = input_windows[i].getstr().decode('utf-8')
-            
-            refresh+=1
-        
+        #put logic here for determining what to do with the inputs
+        #if username_input != "" and password_input != "" and confirm_input !="" and password_input == confirm_input :
+            #bool_var = False
+            #stdscr.clear()
 
 def main(stdscr):
     
