@@ -34,7 +34,7 @@ The goal of this project is to develop a robust and user-friendly tool for perfo
 
 1. **Clone the Repository**:
     ```bash
-    git clone https://github.com/yourusername/Linux_System_Admin_GUI.git
+    git clone https://github.com/andrewumana76/Linux_System_Admin_GUI.git
     cd Linux_System_Admin_GUI
     ```
 
@@ -45,5 +45,13 @@ The goal of this project is to develop a robust and user-friendly tool for perfo
     python main_screen.py
     ```
 
+This is what you should see when the python script is ran: 
 
-![alt text](https://github.com/andrewumana76/Ansible_Demo/blob/main/pictures/inventory_yaml_.png)
+![alt text](https://github.com/andrewumana76/Linux_System_Admin_GUI/blob/main/pictures/Initial_Menu.png)
+
+
+Press 1 to create a new user:
+
+![alt text](https://github.com/andrewumana76/Linux_System_Admin_GUI/blob/main/pictures/Create_User.png)
+
+Currently functionality is still being added with python and bash scripts.
