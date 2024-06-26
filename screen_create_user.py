@@ -27,8 +27,8 @@ def create_user_screen_interface(stdscr):
     username_prompt="Enter Username  : "
     password_prompt="Enter Password  : "
     confirm_prompt ="Confirm Password: "
-    empty_string = ""
-    prompts = [username_prompt, password_prompt, confirm_prompt,empty_string,empty_string,empty_string]
+   
+    prompts = [username_prompt, password_prompt, confirm_prompt, "test", "test2", "test3"]
 
     initial_run = 0
     current_field=0
@@ -62,37 +62,34 @@ def create_user_screen_interface(stdscr):
         dimensions = create_menu_box(stdscr,10,70)
         y = dimensions[0]
         x = dimensions[1]
-             
-        
+                     
         username_y = 3 + y
         username_x = 3 + x
 
         username_input_y = username_y
-        username_input_x = username_x + deviation
+        username_input_x = username_x + len(prompts[0])
 
         password_y = 5 + y
         password_x = 3 + x
 
         password_input_y = password_y
-        password_input_x = password_x + deviation
+        password_input_x = password_x + len(prompts[1])
 
         confirm_y = 7 + y
         confirm_x = 3 + x
 
         confirm_input_y = confirm_y
-        confirm_input_x = confirm_x + deviation
+        confirm_input_x = confirm_x + len(prompts[2]) 
 
         prompts_y = [username_y, password_y, confirm_y, username_input_y, password_input_y, confirm_input_y]
         prompts_x = [username_x, password_x, confirm_x, username_input_x, username_input_x, confirm_input_x]
 
-
         input_windows = create_input_windows(stdscr,prompts,prompts_y,prompts_x)
         dimensions = create_menu_box(stdscr,10,70)
 
-
         buttons = create_buttons(stdscr, button_positions, button_texts)
         
-        user_boxes = [ input_windows[0], input_windows[1], input_windows[2], buttons[0], buttons[0] ]
+        #user_boxes = [ input_windows[0], input_windows[1], input_windows[2], buttons[0], buttons[0] ]
 
         input_positions = [ 
                 (prompts_y[3], prompts_x[3]),
@@ -106,6 +103,10 @@ def create_user_screen_interface(stdscr):
         stdscr.addstr(prompts_y[0], prompts_x[0], prompts[0], curses.color_pair(2))
         stdscr.addstr(prompts_y[1], prompts_x[1], prompts[1], curses.color_pair(2))
         stdscr.addstr(prompts_y[2], prompts_x[2], prompts[2], curses.color_pair(2))
+        stdscr.addstr(prompts_y[3], prompts_x[3], prompts[3], curses.color_pair(2))
+        stdscr.addstr(prompts_y[4], prompts_x[4], prompts[4], curses.color_pair(2))
+        stdscr.addstr(prompts_y[5], prompts_x[5], prompts[5], curses.color_pair(2))
+        
         stdscr.refresh()
 
 
@@ -119,17 +120,3 @@ def create_user_screen_interface(stdscr):
         key = stdscr.getch()
 
         
-        
-
-
-        #if key == 9:
-        #    current_button = (current_button + 1) % len(input_positions)
-        #    curses.curs_set(1)
-        #    stdscr.addstr(1, 40, "Here.........", curses.color_pair(2))
-        #    stdscr.move(input_positions[current_button][0], input_positions[current_button][1])
-        #    stdscr.refresh()
-
-        #put logic here for determining what to do with the inputs
-        #if username_input != "" and password_input != "" and confirm_input !="" and password_input == confirm_input :
-            #bool_var = False
-            #stdscr.clear()

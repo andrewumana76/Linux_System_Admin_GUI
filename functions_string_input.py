@@ -1,4 +1,5 @@
 import curses
+from functions_colors import init_colors
 
 def draw_button_input_boxes(button_positions, input_states, input_values, button_texts):
     for i, state in enumerate(input_states):
@@ -31,6 +32,7 @@ def handle_input(stdscr, button_positions, input_states, input_values, button_te
 
 def create_input_windows(stdscr,prompts,prompts_y, prompts_x):
 
+    init_colors(stdscr)
     input_windows= []
     
     #Creates an input window for each box
@@ -38,6 +40,7 @@ def create_input_windows(stdscr,prompts,prompts_y, prompts_x):
         
         #input_win = curses.newwin(1, (curses.COLS -len(prompts[i]) - 1) // 4 , prompts_y[i], prompts_x[i] + (len(prompts[i])))
         input_win = curses.newwin(1, 20 , prompts_y[i], prompts_x[i] + (len(prompts[i])))
+        input_win.bkgd(curses.color_pair(1))
         input_windows.append(input_win)
     
     return input_windows
