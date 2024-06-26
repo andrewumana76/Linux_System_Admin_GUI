@@ -1,5 +1,5 @@
 import curses
-from create_main_screen import setup_interface
+#from create_main_screen import setup_interface
 from functions_boxes import create_menu_box
 from functions_buttons import create_buttons
 from functions_buttons import draw_buttons
