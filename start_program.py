@@ -40,6 +40,8 @@ def main(stdscr):
     
     while True:
         key = stdscr.getch()
+
+        dimensions = create_menu_box(stdscr, 15,30)
         
         if key == ord('q'):
             break
