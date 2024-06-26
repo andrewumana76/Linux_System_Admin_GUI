@@ -1,10 +1,11 @@
 import curses
+from screen_create_user import create_user_screen_interface
 
 def handle_connect(stdscr, value):    
     
     if value == 1 :
         #create_user(stdscr)
-        stdscr.addstr(6, 0, "1 is pressed...", curses.A_BOLD)
+        create_user_screen_interface(stdscr)
     #if value == 2 :
         #modify user screen
     #if value == 3 :
