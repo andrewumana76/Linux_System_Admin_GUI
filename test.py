@@ -2,8 +2,9 @@ import curses
 
 def main(stdscr):
     # Initialize curses
-    curses.curs_set(1)
+    curses.curs_set(0)
     stdscr.clear()
+    stdscr.refresh()
     
     # Define window dimensions
     h, w = stdscr.getmaxyx()
@@ -88,5 +89,7 @@ def main(stdscr):
             
             draw_buttons()
             draw_input_boxes()
+
+        draw_buttons()
 
 curses.wrapper(main)
