@@ -1,5 +1,7 @@
 import curses
-import string_input_functions
+from string_input_functions import draw_input_boxes
+from string_input_functions import clear_input_box
+from string_input_functions import handle_input
 
 def init_curses():
     curses.curs_set(0)
