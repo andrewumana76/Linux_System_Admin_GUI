@@ -1,6 +1,6 @@
 import curses
 
-def draw_input_boxes(button_positions, input_states, input_values, button_texts):
+def draw_button_input_boxes(button_positions, input_states, input_values, button_texts):
     for i, state in enumerate(input_states):
         if state:
             input_win = curses.newwin(3, 40, button_positions[i][0] + 3, button_positions[i][1] - 10)
@@ -28,3 +28,16 @@ def handle_input(stdscr, button_positions, input_states, input_values, button_te
     input_states[current_button] = False
     curses.curs_set(0)
     clear_input_box(button_positions, current_button)
+
+def create_input_windows(stdscr,prompts,prompts_y, prompts_x):
+
+    input_windows= []
+    
+    #Creates an input window for each box
+    for i in range (len(prompts)) :
+        
+        #input_win = curses.newwin(1, (curses.COLS -len(prompts[i]) - 1) // 4 , prompts_y[i], prompts_x[i] + (len(prompts[i])))
+        input_win = curses.newwin(1, 20 , prompts_y[i], prompts_x[i] + (len(prompts[i])))
+        input_windows.append(input_win)
+    
+    return input_windows
