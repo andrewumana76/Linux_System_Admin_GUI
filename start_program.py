@@ -1,10 +1,11 @@
 import curses
-from string_input_functions import draw_input_boxes
-from string_input_functions import clear_input_box
-from string_input_functions import handle_input
-from button_functions import create_buttons
-from button_functions import draw_buttons
-from color_functions import init_colors
+from functions_boxes import create_menu_box
+from functions_buttons import create_buttons
+from functions_buttons import draw_buttons
+from functions_colors import init_colors
+from functions_string_input import draw_input_boxes
+from functions_string_input import clear_input_box
+from functions_string_input import handle_input
 
 def init_curses():
     curses.curs_set(0)
