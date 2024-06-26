@@ -1,5 +1,8 @@
 import curses
-
+from functions_colors import init_colors
+from functions_boxes import create_menu_box
+from functions_connect import handle_connect
+from function_connect import handle_disconnect
 
 def setup_interface(stdscr):
 
