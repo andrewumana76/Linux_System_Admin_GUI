@@ -4,6 +4,7 @@ from string_input_functions import clear_input_box
 from string_input_functions import handle_input
 from button_functions import create_buttons
 from button_functions import draw_buttons
+from color_functions import init_colors
 
 def init_curses():
     curses.curs_set(0)
