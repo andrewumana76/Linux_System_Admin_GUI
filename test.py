@@ -47,6 +47,12 @@ def main(stdscr):
                 input_win.addstr(1, 1, f"{button_texts[i]}: {input_values[i]}")
                 input_win.refresh()
     
+    def clear_input_box(i):
+        if input_states[i]:
+            input_win = curses.newwin(3, 40, button_positions[i][0] + 3, w // 2 - 20)
+            input_win.clear()
+            input_win.refresh()
+
     draw_buttons()
     
     while True:
@@ -65,17 +71,12 @@ def main(stdscr):
             if input_states[current_button]:
                 # If the input box is already open, close it
                 input_states[current_button] = False
+                clear_input_box(current_button)
                 curses.curs_set(0)
             else:
                 # Open the input box for the selected button
                 input_states[current_button] = True
                 curses.curs_set(1)
-            
-            draw_buttons()
-            draw_input_boxes()
-            
-            if input_states[current_button]:
-                # Handle input for the current input box
                 input_win = curses.newwin(3, 40, button_positions[current_button][0] + 3, w // 2 - 20)
                 input_win.clear()
                 input_win.border()
@@ -86,6 +87,7 @@ def main(stdscr):
                 curses.noecho()
                 input_states[current_button] = False
                 curses.curs_set(0)
+                clear_input_box(current_button)
             
             draw_buttons()
             draw_input_boxes()
