@@ -81,7 +81,8 @@ def create_input_windows(stdscr,prompts,prompts_y, prompts_x):
     #Creates an input window for each box
     for i in range (len(prompts)) :
         
-        input_win = curses.newwin(1, (curses.COLS -len(prompts[i]) - 1) // 4 , prompts_y[i], prompts_x[i] + (len(prompts[i])))
+        #input_win = curses.newwin(1, (curses.COLS -len(prompts[i]) - 1) // 4 , prompts_y[i], prompts_x[i] + (len(prompts[i])))
+        input_win = curses.newwin(1, 20 , prompts_y[i], prompts_x[i] + (len(prompts[i])))
         input_windows.append(input_win)
     
     return input_windows
@@ -133,10 +134,10 @@ def create_user(stdscr):
         username_y = 3 + y
         username_x = 3 + x
 
-        password_y = 4 + y
+        password_y = 5 + y
         password_x = 3 + x
 
-        confirm_y = 5 + y
+        confirm_y = 7 + y
         confirm_x = 3 + x
 
         prompts_y = [username_y, password_y, confirm_y]
