@@ -101,25 +101,19 @@ def create_user_screen_interface(stdscr):
         
         stdscr.refresh()
 
-        #username_input = input_windows[0].getstr().decode('utf-8')
-        #password_input = input_windows[1].getstr().decode('utf-8')
-        #confirm_input = input_windows[2].getstr().decode('utf-8')
-
-
-        #key = stdscr.getch()
-
-        #input_1 = input_1 + chr(key)
-        #stdscr.addstr(input_positions[0][0], input_positions[0][1], input_1, curses.color_pair(2))
-        #stdscr.refresh()
     
-#def handle_input(stdscr, key, current_button, inputs_, input_positions)
         if simulated_key == ord('a'):
             simulated_key = None
             curses.curs_set(2)
-        elif key == curses.KEY_DOWN:
-            current_button += 1
-            stdscr.move(input_positions[current_button][0], input_positions[current_button][1] + len(inputs_[current_button]))
-            handle_input(stdscr, key, current_button, inputs_, input_positions,0)
+        elif key == curses.KEY_DOWN or key == 10:
+            if (current_button + 1) < 3 :
+                current_button += 1
+                stdscr.move(input_positions[current_button][0], input_positions[current_button][1] + len(inputs_[current_button]))
+                handle_input(stdscr, key, current_button, inputs_, input_positions,0)
+            else:
+                current_button=0
+                stdscr.move(input_positions[current_button][0], input_positions[current_button][1] + len(inputs_[current_button]))
+                handle_input(stdscr, key, current_button, inputs_, input_positions,0)
         else:
             handle_input(stdscr, key, current_button, inputs_, input_positions,1)
             #inputs_[current_button] = inputs_[current_button] + chr(key)
