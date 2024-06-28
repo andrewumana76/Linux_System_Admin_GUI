@@ -43,19 +43,6 @@ def clear_input_box(button_positions, i):
         input_win.clear()
         input_win.refresh()
 
-def handle_input(stdscr, button_positions, input_states, input_values, button_texts, current_button):
-    curses.curs_set(1)
-    input_win = curses.newwin(3, 40, button_positions[current_button][0] + 3, button_positions[current_button][1] - 10)
-    input_win.clear()
-    input_win.border()
-    curses.echo()
-    input_win.addstr(1, 1, f"{button_texts[current_button]}: ")
-    input_win.refresh()
-    input_values[current_button] = input_win.getstr(1, len(button_texts[current_button]) + 2, 30).decode('utf-8')
-    curses.noecho()
-    input_states[current_button] = False
-    curses.curs_set(0)
-    clear_input_box(button_positions, current_button)
 
 def create_input_windows(stdscr,prompts,prompts_y, prompts_x):
 
