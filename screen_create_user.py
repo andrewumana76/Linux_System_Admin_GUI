@@ -17,7 +17,28 @@ from functions_string_input import handle_input
 #    if key == 10 or key == 9:
 #        current_position += 1
         
-
+def handle_input(stdscr, key, current_button, inputs_, input_positions, write):
+    
+    if write == 1:
+        inputs_[current_button] = inputs_[current_button] + chr(key)
+    
+    if current_button == 0:
+        stdscr.addstr(input_positions[0][0], input_positions[0][1], inputs_[current_button], curses.color_pair(2))
+        stdscr.addstr(input_positions[1][0], input_positions[1][1], inputs_[1], curses.color_pair(2))
+        stdscr.addstr(input_positions[2][0], input_positions[2][1], inputs_[2], curses.color_pair(2))
+        stdscr.move(input_positions[0][0], input_positions[0][1] + len (inputs_[current_button]))
+        
+    elif current_button == 1:
+        stdscr.addstr(input_positions[0][0], input_positions[0][1], inputs_[0], curses.color_pair(2))
+        stdscr.addstr(input_positions[1][0], input_positions[1][1], inputs_[current_button], curses.color_pair(2))
+        stdscr.addstr(input_positions[2][0], input_positions[2][1], inputs_[2], curses.color_pair(2))
+            
+    elif current_button == 2:
+        stdscr.addstr(input_positions[0][0], input_positions[0][1], inputs_[0], curses.color_pair(2))
+        stdscr.addstr(input_positions[1][0], input_positions[1][1], inputs_[1], curses.color_pair(2))
+        stdscr.addstr(input_positions[2][0], input_positions[2][1], inputs_[current_button], curses.color_pair(2))
+    
+    stdscr.refresh()
 
 def create_user_screen_interface(stdscr):
 
@@ -52,22 +73,14 @@ def create_user_screen_interface(stdscr):
     initial_run=0
     stdscr.refresh()
     
-    input_1=""
-    input_2=[]
-    input_3=[]
+    inputs_ = ["","",""]
+
+    simulated_key = ord('a')
 
     while bool_var == True:
 
-        if initial_run == 0:
-            initial_run +=1
-        else:
-
-            key = stdscr.getch()
-    
-            input_1 = input_1 + chr(key)
-            stdscr.addstr(input_positions[0][0], input_positions[0][1], input_1, curses.color_pair(2))
-            stdscr.refresh()
-        
+        key = simulated_key if simulated_key is not None else stdscr.getch()
+     
         dimensions = create_menu_box(stdscr,10,70)
         y = dimensions[0]
         x = dimensions[1]
@@ -94,7 +107,6 @@ def create_user_screen_interface(stdscr):
         prompts_x = [username_x, password_x, confirm_x, username_input_x, username_input_x, confirm_input_x]
 
         input_windows = create_input_windows(stdscr,prompts,prompts_y,prompts_x)
-        
 
         dimensions = create_menu_box(stdscr,10,70)
 
@@ -111,7 +123,7 @@ def create_user_screen_interface(stdscr):
         ]
 
 
-        win.addstr(prompts_y[0], prompts_x[0], prompts[0], curses.color_pair(2))
+        stdscr.addstr(prompts_y[0], prompts_x[0], prompts[0], curses.color_pair(2))
         stdscr.addstr(prompts_y[1], prompts_x[1], prompts[1], curses.color_pair(2))
         stdscr.addstr(prompts_y[2], prompts_x[2], prompts[2], curses.color_pair(2))
         stdscr.addstr(prompts_y[3], prompts_x[3], prompts[3], curses.color_pair(2))
@@ -129,5 +141,17 @@ def create_user_screen_interface(stdscr):
         #stdscr.addstr(input_positions[0][0], input_positions[0][1], input_1, curses.color_pair(2))
         #stdscr.refresh()
     
-
+#def handle_input(stdscr, key, current_button, inputs_, input_positions)
+        if simulated_key == ord('a'):
+            simulated_key = None
+            curses.curs_set(2)
+        elif key == curses.KEY_DOWN:
+            current_button += 1
+            stdscr.move(input_positions[current_button][0], input_positions[current_button][1] + len(inputs_[current_button]))
+            handle_input(stdscr, key, current_button, inputs_, input_positions,0)
+        else:
+            handle_input(stdscr, key, current_button, inputs_, input_positions,1)
+            #inputs_[current_button] = inputs_[current_button] + chr(key)
+            #stdscr.addstr(input_positions[0][0], input_positions[0][1], inputs_[current_button], curses.color_pair(2))
+            #stdscr.refresh()
         
