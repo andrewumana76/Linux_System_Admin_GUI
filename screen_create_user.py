@@ -114,6 +114,15 @@ def create_user_screen_interface(stdscr):
                 current_button=0
                 stdscr.move(input_positions[current_button][0], input_positions[current_button][1] + len(inputs_[current_button]))
                 handle_input(stdscr, key, current_button, inputs_, input_positions,0)
+        elif key == curses.KEY_UP :
+            if (current_button - 1) >= 0 :
+                current_button -= 1
+                stdscr.move(input_positions[current_button][0], input_positions[current_button][1] + len(inputs_[current_button]))
+                handle_input(stdscr, key, current_button, inputs_, input_positions,0)
+            else:
+                current_button=2
+                stdscr.move(input_positions[current_button][0], input_positions[current_button][1] + len(inputs_[current_button]))
+                handle_input(stdscr, key, current_button, inputs_, input_positions,0)
         else:
             handle_input(stdscr, key, current_button, inputs_, input_positions,1)
             #inputs_[current_button] = inputs_[current_button] + chr(key)
