@@ -42,7 +42,7 @@ The goal of this project is to develop a robust and user-friendly tool for perfo
     Ensure you have Python installed, then install required packages:
 
     ```bash
-    python main_screen.py
+    python start_program.py
     ```
 
 This is what you should see when the python script is ran: 
