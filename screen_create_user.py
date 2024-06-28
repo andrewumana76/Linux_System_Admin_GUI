@@ -11,37 +11,6 @@ from functions_string_input import create_input_windows
 from functions_string_input import handle_input
 
 
-#def handle_input2(key):
-#    nonlocal input_value
-#
-#    if key == 10 or key == 9:
-#        current_position += 1
-        
-def handle_input(stdscr, key, current_button, inputs_, input_positions, write):
-    
-    if write == 1:
-        inputs_[current_button] = inputs_[current_button] + chr(key)
-    
-    if current_button == 0:
-        stdscr.addstr(input_positions[0][0], input_positions[0][1], inputs_[current_button], curses.color_pair(2))
-        stdscr.addstr(input_positions[1][0], input_positions[1][1], inputs_[1], curses.color_pair(2))
-        stdscr.addstr(input_positions[2][0], input_positions[2][1], inputs_[2], curses.color_pair(2))
-        stdscr.move(input_positions[0][0], input_positions[0][1] + len (inputs_[current_button]))
-        
-    elif current_button == 1:
-        stdscr.addstr(input_positions[0][0], input_positions[0][1], inputs_[0], curses.color_pair(2))
-        stdscr.addstr(input_positions[1][0], input_positions[1][1], inputs_[current_button], curses.color_pair(2))
-        stdscr.addstr(input_positions[2][0], input_positions[2][1], inputs_[2], curses.color_pair(2))
-        stdscr.move(input_positions[1][0], input_positions[1][1] + len (inputs_[current_button]))
-            
-    elif current_button == 2:
-        stdscr.addstr(input_positions[0][0], input_positions[0][1], inputs_[0], curses.color_pair(2))
-        stdscr.addstr(input_positions[1][0], input_positions[1][1], inputs_[1], curses.color_pair(2))
-        stdscr.addstr(input_positions[2][0], input_positions[2][1], inputs_[current_button], curses.color_pair(2))
-        stdscr.move(input_positions[2][0], input_positions[2][1] + len (inputs_[current_button]))
-    
-    stdscr.refresh()
-
 def create_user_screen_interface(stdscr):
 
     #clear screen  
