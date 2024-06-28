@@ -21,3 +21,21 @@ def create_menu_box(stdscr, box_height, box_width):
     dimensions = [y , x]
 
     return dimensions
+
+def create_menu_box2(stdscr, box_height, box_width):
+
+    #Calculating max X and Y length
+    height, width = stdscr.getmaxyx()
+
+    #Setting X and Y locations based on box height/width
+    y = (curses.LINES - box_height) // 2
+    x = (curses.COLS - box_width) // 2
+
+    #Draw box
+    box_win = curses.newwin(box_height, box_width, y, x)
+    box_win.bkgd(' ', curses.color_pair(2))
+    box_win.box()
+    box_win.refresh()
+    stdscr.refresh()
+
+    return box_win
